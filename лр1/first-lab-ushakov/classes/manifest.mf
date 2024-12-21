@@ -1,0 +1,2 @@
+main-class: mypkg.FirstClass
+class-path: classes/
