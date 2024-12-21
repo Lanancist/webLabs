@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Форма регистрации и входа на сайт">
+    <meta name="author" content="Ушаков">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пользовательские формы</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<!-- Блок формы входа -->
+<div class="form-box">
+    <h1 class="form-header">Вход</h1>
+    <form>
+        <label for="signin-username">Имя пользователя</label>
+        <input type="text" id="signin-username" placeholder="Введите имя пользователя" required>
+        <label for="signin-password">Пароль</label>
+        <input type="password" id="signin-password" placeholder="Введите пароль" required>
+        <button type="submit">Войти</button>
+    </form>
+</div>
+<body>
+    <!-- Блок формы регистрации -->
+    <div class="form-box">
+        <h1 class="form-header">Регистрация</h1>
+        <form>
+            <label for="signup-username">Имя пользователя</label>
+            <input type="text" id="signup-username" placeholder="Введите имя пользователя" required>
+            <label for="signup-password">Пароль</label>
+            <input type="password" id="signup-password" placeholder="Введите пароль" required>
+            <label for="signup-confirm">Подтверждение пароля</label>
+            <input type="password" id="signup-confirm" placeholder="Повторите пароль" required>
+            <button type="submit">Создать аккаунт</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+body {
+  font-family: "Verdana", sans-serif;
+  background-color: #eef2f3;
+  margin: 0;
+  padding: 50px;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  box-sizing: border-box;
+}
+h1 {
+  font-size: 26px;
+  text-align: left;
+  color: #333333;
+  margin-bottom: 15px;
+}
+/* Заголовки для форм */
+.form-header {
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #007acc;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #007acc;
+  padding-bottom: 5px;
+}
+/* Стиль контейнеров форм */
+.form-box {
+  width: 300px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+label {
+  font-size: 14px;
+  color: #555555;
+  display: block;
+  margin-bottom: 8px;
+}
+input {
+  width: 91%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 2px solid #cccccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fafafa;
+  transition: border-color 0.3s ease;
+}
+input:focus {
+  border-color: #007acc;
+  outline: none;
+  background-color: #ffffff;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #007acc;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+button:hover {
+  background-color: #005f99;
+  transform: scale(1.02);
+}
