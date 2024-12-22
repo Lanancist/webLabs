@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о пользователе</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #user-info, #user-message, #add-user-form {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            display: none;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Работа с информацией о пользователе</h1>
+
+    <!-- Поле для запроса информации о пользователе -->
+    <label for="user-id">Введите ID пользователя:</label>
+    <input type="text" id="user-id" placeholder="ID пользователя">
+    <button id="request-btn">Запросить</button>
+
+    <div id="user-info">
+        <h2>Информация о пользователе:</h2>
+        <p id="info-text"></p>
+    </div>
+
+    <!-- Поле для ввода и отправки сообщения -->
+    <div id="user-message">
+        <h2>Отправить информацию на сайт:</h2>
+        <textarea id="user-text" placeholder="Введите информацию..."></textarea><br>
+        <button id="send-message-btn">Отправить</button>
+    </div>
+
+    <!-- Форма для добавления нового пользователя -->
+    <div id="add-user-form">
+        <h2>Добавить нового пользователя:</h2>
+        <label for="new-user-id">Введите ID нового пользователя:</label>
+        <input type="text" id="new-user-id" placeholder="ID нового пользователя"><br>
+        
+        <label for="new-user-name">Введите имя нового пользователя:</label>
+        <input type="text" id="new-user-name" placeholder="Имя нового пользователя"><br>
+        
+        <button id="add-user-btn">Добавить пользователя</button>
+    </div>
+
+    <script>
+        document.getElementById('request-btn').addEventListener('click', function() {
+            const userId = document.getElementById('user-id').value;
+
+            if (userId.trim() === "") {
+                alert("Пожалуйста, введите ID пользователя.");
+                return;
+            }
+
+            fetch(`http://127.0.0.1:8000//users/${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Если API возвращает успешный ответ
+                    if (data && data.info) {
+                        document.getElementById('info-text').innerText = data.info;
+                        document.getElementById('user-info').style.display = 'block';
+                    } else {
+                        alert('Информация о пользователе не найдена.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    alert('Произошла ошибка при запросе данных.');
+                });
+        });
+
+        // Обработчик для отправки информации
+        document.getElementById('send-message-btn').addEventListener('click', function() {
+            const userMessage = document.getElementById('user-text').value;
+
+            if (userMessage.trim() === "") {
+                alert("Пожалуйста, введите информацию.");
+                return;
+            }
+
+            // Здесь мы можем отправить данные на сервер (например, через fetch)
+            // Для демонстрации просто выведем сообщение на страницу
+            alert("Информация отправлена: " + userMessage);
+
+            // Очистим поле ввода после отправки
+            document.getElementById('user-text').value = "";
+        });
+
+        // Обработчик для добавления нового пользователя
+        document.getElementById('add-user-btn').addEventListener('click', function() {
+            const newUserId = document.getElementById('new-user-id').value;
+            const newUserName = document.getElementById('new-user-name').value;
+
+            if (newUserId.trim() === "" || newUserName.trim() === "") {
+                alert("Пожалуйста, введите все данные для нового пользователя.");
+                return;
+            }
+
+            // Здесь мы отправим данные на сервер для добавления нового пользователя
+            fetch('http://127.0.0.1:8000//users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: newUserId,
+                    name: newUserName
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Проверка успешности добавления пользователя
+                if (data.success) {
+                    alert('Новый пользователь добавлен!');
+                } else {
+                    alert('Произошла ошибка при добавлении пользователя.');
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Произошла ошибка при добавлении пользователя.');
+            });
+        });
+
+        // Отображение формы добавления нового пользователя
+        document.getElementById('add-user-form').style.display = 'block';
+    </script>
+
+</body>
+</html>
